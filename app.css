@@ -1,0 +1,41 @@
+:root {
+  --clr-grey-50: hsla(285, 2%, 39%, 1);
+  --clr-grey-100: hsla(0, 0%, 38%, 1);
+  --clr-grey-200: hsla(0, 0%, 19%, 1);
+  --clr-grey-300: hsla(0, 0%, 10%, 1);
+
+  --clr-text-light: hsla(0, 0%, 89%, 1);
+  --clr-text-mid: hsla(0, 0%, 38%, 1);
+  --clr-text-dark: hsla(0, 0%, 19%, 1);
+
+  --clr-stroke-50: hsla(0, 0%, 86%, 1);
+  --clr-stroke-100: hsla(0, 0%, 88%, 1);
+  --clr-stroke-200: hsla(0, 0%, 38%, 1);
+
+  --clr-state-hover: hsla(0, 0%, 95%, 1);
+  --clr-state-active: hsla(0, 0%, 94%, 1);
+  --clr-state-focus: hsla(214, 100%, 41%, 1);
+
+  --clr-white: hsla(0, 0%, 100%, 1);
+  --clr-background: hsla(0, 0%, 95%, 1);
+
+  --fs-400: 0.75rem;
+  --fs-600: 0.8125rem;
+  --fs-800: 0.875rem;
+
+  --lh-400: 0.975rem;
+  --lh-600: 1.1375rem;
+  --lh-800: 1.225rem;
+
+  --fw-base: 400;
+  --fw-medium: 500;
+  --fw-bold: 600;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: var(--fs-400);
+  font-weight: var(--fw-base);
+  line-height: var(--lh-400);
+  letter-spacing: 0%;
+}
