@@ -127,7 +127,7 @@ body {
 }
 
 .header__navigation {
-  --gap: 0;
+  --gap: 0.25rem;
   align-items: center;
   justify-content: center;
 }
