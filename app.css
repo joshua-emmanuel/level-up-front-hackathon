@@ -56,10 +56,43 @@ button {
   background: none;
 }
 
-.font-800 {
-  font-size: var(--fs-800);
-  font-weight: var(--fw-bold);
+.fs-small {
+  font-size: var(--fs-200);
+  line-height: var(--lh-200);
+}
+
+.fs-base {
+  font-size: var(--fs-400);
   line-height: var(--lh-800);
+}
+
+.fs-large {
+  font-size: var(--fs-800);
+  line-height: var(--lh-800);
+}
+
+.fw-regular {
+  font-weight: var(--fw-base);
+}
+
+.fw-medium {
+  font-weight: var(--fw-medium);
+}
+
+.fw-semi-bold {
+  font-weight: var(--fw-bold);
+}
+
+.clr-text-light {
+  color: var(--clr-text-light);
+}
+
+.clr-text-mid {
+  color: var(--clr-text-mid);
+}
+
+.clr-text-dark {
+  color: var(--clr-text-dark);
 }
 
 .wrapper {
@@ -70,6 +103,14 @@ button {
   --gap: 0.5rem;
   display: flex;
   gap: var(--gap, 0);
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
 }
 
 body {
@@ -83,6 +124,7 @@ body {
 }
 
 .header {
+  position: relative;
   padding: 0.75rem 1rem;
   align-items: center;
   justify-content: space-between;
@@ -136,7 +178,7 @@ body {
   list-style-type: none;
 }
 
-.header__navigation-notification button {
+.header__navigation-notification > button {
   align-items: center;
   justify-content: center;
   width: 2rem;
@@ -144,25 +186,27 @@ body {
   border-radius: 0.5rem;
 }
 
-.header__navigation-collections button {
+.header__navigation-collections > button {
   align-items: center;
   padding: 0.125rem;
   border-radius: 0.5rem;
   color: var(--clr-text-light);
 }
 
-.header__navigation-notification button:hover,
-.header__navigation-collections button:hover {
+.header__navigation-notification > button:hover,
+.header__navigation-collections > button:hover {
   background-color: var(--clr-stroke-200);
 }
 
-.header__navigation-notification button:active,
-.header__navigation-collections button:active {
+.header__navigation-notification > button:active,
+.header__navigation-collections > button:active {
   background-color: var(--clr-grey-50);
 }
 
-.header__navigation-notification button:focus,
-.header__navigation-collections button:focus {
+.header__navigation-notification > button:focus,
+.header__navigation-notification > button:focus-visible,
+.header__navigation-collections > button:focus,
+.header__navigation-collections > button:focus-visible {
   background-color: var(--clr-grey-50);
   box-shadow: 0px 0px 0px 3px #005bd3, 0px 0px 0px 1px #000;
 }
@@ -186,11 +230,11 @@ body {
     --gap: 0.5rem;
   }
 
-  .header__navigation-notification button {
+  .header__navigation-notification > button {
     background-color: var(--clr-grey-200);
   }
 
-  .header__navigation-collections button {
+  .header__navigation-collections > button {
     padding-left: 0.5rem;
     background-color: var(--clr-grey-200);
   }
@@ -198,4 +242,74 @@ body {
   .header__navigation-collections .full-name {
     display: inline;
   }
+}
+
+.notification-menu[aria-hidden='true'] {
+  display: none;
+}
+
+.notification-menu[aria-hidden='false'] {
+  display: block;
+}
+
+.notification-menu {
+  position: absolute;
+  top: 4rem;
+  right: 1rem;
+  border: 1px solid var(--clr-stroke-50);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  background-color: var(--clr-white);
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
+}
+
+.notification-header {
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification-menu p {
+  text-align: center;
+}
+
+.collections-menu[aria-hidden='true'] {
+  display: none;
+}
+
+.collections-menu[aria-hidden='false'] {
+  display: block;
+}
+
+.collections-menu {
+  position: absolute;
+  width: 20rem;
+  top: 4rem;
+  right: 1rem;
+  border: 1px solid var(--clr-stroke-50);
+  border-radius: 0.875rem;
+  background-color: var(--clr-white);
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
+}
+
+.collections-menu section:not(:last-child) {
+  border-bottom: 1px solid var(--clr-stroke-100);
+}
+
+.collections-menu section {
+  padding: 0.65rem 1rem 0 0.5rem;
+}
+
+.collections-menu li {
+  margin-bottom: 0.65rem;
+}
+
+.collections-menu a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.collections-menu .admin-details {
+  --gap: 0;
+  flex-direction: column;
 }
