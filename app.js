@@ -35,7 +35,8 @@ function toggleMenu(event) {
 }
 
 function closeAllMenus(event) {
-  if (event.target.closest('[aria-controls]')) return;
+  if (event.target.closest('[aria-controls]') || event.closest('[role="menu"]'))
+    return;
   menuButtons.forEach((menuButton) => {
     if (menuButton.getAttribute('aria-expanded') === 'true') {
       const menuId = menuButton.getAttribute('aria-controls');
