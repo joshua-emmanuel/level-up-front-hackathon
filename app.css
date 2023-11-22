@@ -50,7 +50,6 @@ input {
 }
 
 button {
-  outline: none;
   border: 0;
   cursor: pointer;
   background: none;
@@ -179,6 +178,7 @@ body {
 }
 
 .header__navigation-notification > button {
+  outline: none;
   align-items: center;
   justify-content: center;
   width: 2rem;
@@ -187,6 +187,7 @@ body {
 }
 
 .header__navigation-collections > button {
+  outline: none;
   align-items: center;
   padding: 0.125rem;
   border-radius: 0.5rem;
