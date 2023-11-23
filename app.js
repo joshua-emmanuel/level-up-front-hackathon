@@ -7,6 +7,9 @@ const collectionsButton = menuButtons.find(
   (menuButton) =>
     menuButton.getAttribute('aria-controls') === 'collections-menu'
 );
+const trialCalloutDismissBtn = document.querySelector(
+  '.trial-callout__dismiss-btn'
+);
 
 function closeOtherMenuBtns(currentMenuId) {
   const otherMenuBtns = menuButtons.filter(
@@ -50,6 +53,13 @@ function closeAllMenus(event) {
   });
 }
 
+function dismissTrialCallout(event) {
+  const btn = event.currentTarget;
+  const trialCallout = btn.closest('.trial-callout');
+  trialCallout.remove();
+}
+
 notificationButton.addEventListener('click', toggleMenu);
 collectionsButton.addEventListener('click', toggleMenu);
 document.addEventListener('click', closeAllMenus);
+trialCalloutDismissBtn.addEventListener('click', dismissTrialCallout);
