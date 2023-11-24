@@ -171,6 +171,10 @@ button:focus-visible {
   color: var(--clr-text-dark);
 }
 
+.clr-state-focus {
+  color: var(--clr-state-focus);
+}
+
 .wrapper {
   width: min(100%, 50rem);
   margin-inline: auto;
@@ -440,6 +444,7 @@ main {
   margin-top: 2rem;
 }
 
+/* Trial Callout */
 .trial-callout {
   align-items: start;
   justify-content: space-between;
@@ -472,4 +477,129 @@ main {
   .trial-callout__text {
     margin-right: 16rem;
   }
+}
+
+/* Setup Guide */
+.setup-guide {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--clr-stroke-50);
+  background-color: var(--clr-white);
+  box-shadow: 0px 1px 0px 0px #0000000d;
+}
+
+.setup-guide__heading h2 {
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-800);
+}
+
+.setup-guide__header > div:last-child {
+  margin-top: 1rem;
+}
+
+.progress-bar-outer {
+  width: 4.5rem;
+  height: 0.25rem;
+  border-radius: 0.5rem;
+  background-color: #e3e3e3;
+}
+
+.progress-bar {
+  border-radius: 0.5rem;
+  width: 0;
+  height: 100%;
+  background-color: var(--clr-grey-300);
+  transition: width 350ms ease-out;
+}
+
+button[aria-controls='setup-guide__steps'] {
+  transition: transform 350ms ease-out;
+}
+
+button[aria-controls='setup-guide__steps'][aria-expanded='true'] {
+  transform: rotate(180deg);
+}
+
+button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
+  transform: rotate(0deg);
+}
+
+.setup-guide__steps {
+  padding-top: 1.5rem;
+}
+
+.setup-guide__steps[aria-hidden='true'] {
+  display: none;
+}
+
+.setup-guide__steps[aria-hidden='false'] {
+  display: block;
+}
+
+.setup-guide__step {
+  border-radius: 0.625rem;
+  padding: 0.5rem 0.5rem 0.75rem 2.5rem;
+  margin-bottom: 0.12rem;
+}
+
+.setup-guide__step:has([aria-expanded='true']) {
+  background-color: hsl(0, 0%, 95%);
+}
+
+.setup-guide__step-heading {
+  margin-bottom: 1rem;
+}
+
+.setup-guide__step-body[aria-hidden='true'] {
+  display: none;
+}
+
+.setup-guide__step-body[aria-hidden='false'] {
+  display: flex;
+  align-items: start;
+}
+
+.setup-guide__step-info {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+  max-width: 20.375rem;
+  font-weight: var(--fw-medium);
+  color: var(--clr-text-mid);
+}
+
+.setup-guide__step-info a {
+  text-decoration: none;
+}
+
+.setup-guide__step-info .btn--3 {
+  color: var(--clr-text-dark);
+}
+
+.setup-guide__step-image {
+  display: none;
+}
+
+@media (min-width: 50em) {
+  .setup-guide {
+    border-radius: 1.125rem;
+  }
+
+  .setup-guide__step-image {
+    display: block;
+  }
+}
+
+@media (min-width: 25em) {
+  .setup-guide__step-info {
+    max-width: 30.24096rem;
+  }
+}
+
+.checkbox-img {
+  display: inline-block;
+  object-fit: cover;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url('https://crushingit.tech/hackathon-assets/icon-dashed-circle.svg');
 }
