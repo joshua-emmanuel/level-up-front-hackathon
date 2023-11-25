@@ -1,4 +1,4 @@
-const menuButtons = [...document.querySelectorAll('[aria-haspopup="menu"]')];
+const menuButtons = [...document.querySelectorAll('[aria-haspopup]')];
 const notificationButton = menuButtons.find(
   (menuButton) =>
     menuButton.getAttribute('aria-controls') === 'notification-menu'
@@ -116,21 +116,44 @@ function toggleSetupGuideStepsAccordion(event) {
 function openNextSetupGuideStepsAccordion(event) {
   const setupGuideCheckbox = event.target.closest('.setup-guide__checkbox');
   if (!setupGuideCheckbox) return;
+
   const checkboxIsChecked = setupGuideCheckbox.checked;
   if (!checkboxIsChecked) return;
+
   const currentAccordion = setupGuideCheckbox.closest('.setup-guide__step');
   const currentAccordionLabel =
     currentAccordion.getAttribute('aria-labelledby');
-  const nextAccordions = [
-    ...setupGuideSteps.querySelectorAll(
-      `[aria-labelledby="${currentAccordionLabel}"] ~ .setup-guide__step`
-    ),
+
+  const allAccordions = [
+    ...setupGuideSteps.querySelectorAll('.setup-guide__step'),
   ];
-  const accordionToBeOpened = nextAccordions.find((accordion) => {
-    const accordionCheckbox = accordion.querySelector('.setup-guide__checkbox');
-    if (!accordionCheckbox.checked) return true;
+
+  // Find the index of the current accordion
+  const currentIndex = allAccordions.findIndex((accordion) => {
+    return accordion.getAttribute('aria-labelledby') === currentAccordionLabel;
   });
+
+  // Get next accordions after the current one
+  const nextAccordions = allAccordions.slice(currentIndex + 1);
+
+  // If no incomplete step is found after the current step, check previous accordions
+  let accordionToBeOpened = nextAccordions.find((accordion) => {
+    const accordionCheckbox = accordion.querySelector('.setup-guide__checkbox');
+    return !accordionCheckbox.checked;
+  });
+
+  // If no incomplete step is found, check previous accordions
+  if (!accordionToBeOpened) {
+    accordionToBeOpened = allAccordions.find((accordion) => {
+      const accordionCheckbox = accordion.querySelector(
+        '.setup-guide__checkbox'
+      );
+      return !accordionCheckbox.checked;
+    });
+  }
+
   if (!accordionToBeOpened) return;
+
   const accordionToBeOpenedButton = accordionToBeOpened.querySelector(
     'button[aria-controls]'
   );
@@ -139,6 +162,7 @@ function openNextSetupGuideStepsAccordion(event) {
   const accordionToBeOpenedContent = document.getElementById(
     accordionToBeOpenedContentId
   );
+
   closeAllSetupGuideStepsAccordions();
   openAccordion(accordionToBeOpenedButton, accordionToBeOpenedContent);
 }
