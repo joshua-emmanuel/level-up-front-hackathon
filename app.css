@@ -569,6 +569,10 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
   justify-content: space-between;
 }
 
+.setup-guide__step-heading {
+  margin-bottom: 1rem;
+}
+
 .setup-guide__step-info {
   display: grid;
   justify-items: start;
@@ -627,7 +631,6 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
 
 .setup-guide__checkbox:checked + .checkbox-img {
   animation: checkbox-animation 350ms ease-out forwards;
-  /* background-image: url('data:image/svg+xml,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="Component 13"><circle id="Ellipse 1" cx="11.9996" cy="12" r="10" fill="%231C181D" stroke="%231C181D" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/><g id="TickMinor"><path id="Icon" fill-rule="evenodd" clip-rule="evenodd" d="M16.8162 8.64149C17.0603 8.88557 17.0603 9.2813 16.8162 9.52538L11.3995 14.942C11.1555 15.1861 10.7597 15.1861 10.5157 14.942L7.80733 12.2337C7.56325 11.9896 7.56325 11.5939 7.80733 11.3498C8.0514 11.1057 8.44713 11.1057 8.69121 11.3498L10.9576 13.6162L15.9323 8.64149C16.1764 8.39742 16.5721 8.39742 16.8162 8.64149Z" fill="white"/></g></g></svg>'); */
 }
 
 @keyframes checkbox-animation {
@@ -655,6 +658,10 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
 
   .setup-guide__step-image {
     display: block;
+  }
+
+  .setup-guide__step-heading {
+    margin-bottom: 0;
   }
 }
 
