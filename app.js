@@ -20,7 +20,7 @@ const allSetupGuideAccordionCheckbox = [
   ...document.querySelectorAll('.setup-guide__checkbox'),
 ];
 
-function closeOtherMenuBtns(currentMenuId) {
+function closeOtherMenus(currentMenuId) {
   const otherMenuBtns = menuButtons.filter(
     (menuButton) => menuButton.getAttribute('aria-controls') !== currentMenuId
   );
@@ -32,24 +32,87 @@ function closeOtherMenuBtns(currentMenuId) {
   });
 }
 
+function handleMenuEscapeKeypress(event) {
+  const menu = event.currentTarget;
+  const menuId = menu.id;
+  const menuButton = document.querySelector(`[aria-controls="${menuId}"]`);
+  const keyPressed = event.key;
+  if (keyPressed === 'Escape') {
+    closeMenu(menu, menuButton);
+  }
+}
+
+function handleMenuItemArrowKeypress(event, menuItemIndex, allMenuItems) {
+  const keyPressed = event.key;
+  const isFirstMenuItem = menuItemIndex === 0;
+  const isLastMenuItem = menuItemIndex === allMenuItems.length - 1;
+  const firstMenuItem = allMenuItems[0];
+  const lastMenuItem = allMenuItems[allMenuItems.length - 1];
+  const previousMenuItem = allMenuItems[menuItemIndex - 1];
+  const nextMenuItem = allMenuItems[menuItemIndex + 1];
+
+  if (keyPressed === 'ArrowDown' || keyPressed === 'ArrowRight') {
+    if (isLastMenuItem) {
+      firstMenuItem.focus();
+      return;
+    }
+    nextMenuItem.focus();
+  }
+
+  if (keyPressed === 'ArrowUp' || keyPressed === 'ArrowLeft') {
+    if (isFirstMenuItem) {
+      lastMenuItem.focus();
+      return;
+    }
+    previousMenuItem.focus();
+  }
+}
+
+function openMenu(menu, menuButton) {
+  menu.setAttribute('aria-hidden', false);
+  menuButton.setAttribute('aria-expanded', true);
+
+  menu.addEventListener('keydown', handleMenuEscapeKeypress);
+
+  const allMenuItems = menu.querySelectorAll('[role="menuitem"]');
+  if (allMenuItems.length === 0) {
+    const firstButtonInMenu = menu.querySelector('button');
+    firstButtonInMenu.focus();
+    return;
+  }
+  allMenuItems[0].focus();
+
+  allMenuItems.forEach((menuItem, menuItemIndex, allMenuItems) => {
+    menuItem.addEventListener('keydown', (event) =>
+      handleMenuItemArrowKeypress(event, menuItemIndex, allMenuItems)
+    );
+  });
+}
+
+function closeMenu(menu, menuButton) {
+  menu.setAttribute('aria-hidden', true);
+  menuButton.setAttribute('aria-expanded', false);
+  menuButton.focus();
+}
+
 function toggleMenu(event) {
-  const button = event.currentTarget;
-  const menuId = button.getAttribute('aria-controls');
+  const menuButton = event.currentTarget;
+  const menuId = menuButton.getAttribute('aria-controls');
   const menu = document.getElementById(menuId);
-  if (button.getAttribute('aria-expanded') === 'false') {
-    button.setAttribute('aria-expanded', true);
-    menu.setAttribute('aria-hidden', false);
-    closeOtherMenuBtns(menuId);
+  const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+  if (isExpanded) {
+    closeMenu(menu, menuButton);
   } else {
-    button.setAttribute('aria-expanded', false);
-    menu.setAttribute('aria-hidden', true);
+    openMenu(menu, menuButton);
+    closeOtherMenus(menuId);
   }
 }
 
 function closeAllMenus(event) {
   if (
     event.target.closest('[aria-controls]') ||
-    event.target.closest('[role="menu"]')
+    event.target.closest('[role="menu"]') ||
+    event.target.closest('[role="alert"]')
   )
     return;
   menuButtons.forEach((menuButton) => {
