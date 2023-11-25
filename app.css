@@ -559,17 +559,14 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
   background-color: hsl(0, 0%, 95%);
 }
 
-.setup-guide__step-heading {
-  margin-bottom: 1rem;
-}
-
 .setup-guide__step-body[aria-hidden='true'] {
   display: none;
 }
 
 .setup-guide__step-body[aria-hidden='false'] {
   display: flex;
-  align-items: start;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .setup-guide__step-info {
@@ -591,6 +588,7 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
 
 .setup-guide__step-image {
   display: none;
+  align-self: start;
 }
 
 .setup-guide__step-checkbox {
