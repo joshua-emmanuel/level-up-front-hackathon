@@ -641,6 +641,11 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="%238A8A8A" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/></svg>');
 }
 
+.setup-guide__checkbox:focus + .checkbox-img {
+  border-radius: 0.25rem;
+  outline: 2px solid var(--clr-state-focus);
+}
+
 .setup-guide__checkbox:checked + .checkbox-img {
   animation: checkbox-animation 350ms ease-out forwards;
 }
