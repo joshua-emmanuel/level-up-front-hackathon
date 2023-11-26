@@ -563,7 +563,7 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
 .setup-guide__step {
   position: relative;
   border-radius: 0.625rem;
-  padding: 0.65rem 0.5rem 0.75rem 2.5rem;
+  padding: 0.7rem 0.5rem 0.75rem 2.5rem;
   margin-bottom: 0.12rem;
 }
 
@@ -679,6 +679,10 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
 
   .setup-guide__step-heading {
     margin-bottom: 0;
+  }
+
+  .setup-guide__step-body {
+    margin-top: -0.5rem;
   }
 }
 
