@@ -684,6 +684,10 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
   .setup-guide__step-body {
     margin-top: -0.5rem;
   }
+
+  .setup-guide__step:last-child .setup-guide__step-body {
+    margin-top: 0;
+  }
 }
 
 @media (min-width: 25em) {
