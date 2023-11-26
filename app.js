@@ -226,8 +226,13 @@ function openNextSetupGuideStepsAccordion(event) {
     accordionToBeOpenedContentId
   );
 
+  const accordionToBeOpenedCheckBox = accordionToBeOpened.querySelector(
+    '.setup-guide__checkbox'
+  );
+
   closeAllSetupGuideStepsAccordions();
   openAccordion(accordionToBeOpenedButton, accordionToBeOpenedContent);
+  accordionToBeOpenedCheckBox.focus();
 }
 
 function updateProgressBar(event) {
@@ -242,6 +247,12 @@ function updateProgressBar(event) {
   numOfCompletedGuides.textContent = numofCheckedCheckboxes;
 }
 
+function handleCheckboxEnterKeyPress(event) {
+  const checkbox = event.currentTarget;
+  const keyPressed = event.key;
+  if (keyPressed === 'Enter') checkbox.click();
+}
+
 notificationButton.addEventListener('click', toggleMenu);
 collectionsButton.addEventListener('click', toggleMenu);
 document.addEventListener('click', closeAllMenus);
@@ -250,3 +261,6 @@ setupStepsAccordionBtn.addEventListener('click', toggleSetupStepsAccordion);
 setupGuideSteps.addEventListener('click', toggleSetupGuideStepsAccordion);
 setupGuideSteps.addEventListener('click', openNextSetupGuideStepsAccordion);
 setupGuideSteps.addEventListener('click', updateProgressBar);
+allSetupGuideAccordionCheckbox.forEach((checkbox) => {
+  checkbox.addEventListener('keydown', handleCheckboxEnterKeyPress);
+});
