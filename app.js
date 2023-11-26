@@ -16,6 +16,9 @@ const setupStepsAccordionBtn = document.querySelector(
 const setupGuideSteps = document.querySelector('.setup-guide__steps');
 const progressBar = document.querySelector('.progress-bar');
 const numOfCompletedGuides = document.querySelector('.no-of-completed-guide');
+const allSetupGuideAccordionCheckbox = [
+  ...document.querySelectorAll('.setup-guide__checkbox'),
+];
 
 function closeOtherMenus(currentMenuId) {
   const otherMenuBtns = menuButtons.filter(
