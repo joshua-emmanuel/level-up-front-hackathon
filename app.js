@@ -16,9 +16,6 @@ const setupStepsAccordionBtn = document.querySelector(
 const setupGuideSteps = document.querySelector('.setup-guide__steps');
 const progressBar = document.querySelector('.progress-bar');
 const numOfCompletedGuides = document.querySelector('.no-of-completed-guide');
-const allSetupGuideAccordionCheckbox = [
-  ...document.querySelectorAll('.setup-guide__checkbox'),
-];
 
 function closeOtherMenus(currentMenuId) {
   const otherMenuBtns = menuButtons.filter(
@@ -77,6 +74,7 @@ function openMenu(menu, menuButton) {
   const allMenuItems = menu.querySelectorAll('[role="menuitem"]');
   if (allMenuItems.length === 0) {
     const firstButtonInMenu = menu.querySelector('button');
+    if (!firstButtonInMenu) return;
     firstButtonInMenu.focus();
     return;
   }
@@ -176,28 +174,9 @@ function toggleSetupGuideStepsAccordion(event) {
   openAccordion(accordionButton, accordionContent);
 }
 
-function openNextSetupGuideStepsAccordion(event) {
-  const setupGuideCheckbox = event.target.closest('.setup-guide__checkbox');
-  if (!setupGuideCheckbox) return;
-
-  const checkboxIsChecked = setupGuideCheckbox.checked;
-  if (!checkboxIsChecked) return;
-
-  const currentAccordion = setupGuideCheckbox.closest('.setup-guide__step');
-  const currentAccordionLabel =
-    currentAccordion.getAttribute('aria-labelledby');
-
-  const allAccordions = [
-    ...setupGuideSteps.querySelectorAll('.setup-guide__step'),
-  ];
-
-  // Find the index of the current accordion
-  const currentIndex = allAccordions.findIndex((accordion) => {
-    return accordion.getAttribute('aria-labelledby') === currentAccordionLabel;
-  });
-
+function findNextAccordionToOpen(allAccordions, currentAccordionIndex) {
   // Get next accordions after the current one
-  const nextAccordions = allAccordions.slice(currentIndex + 1);
+  const nextAccordions = allAccordions.slice(currentAccordionIndex + 1);
 
   // If no incomplete step is found after the current step, check previous accordions
   let accordionToBeOpened = nextAccordions.find((accordion) => {
@@ -215,24 +194,48 @@ function openNextSetupGuideStepsAccordion(event) {
     });
   }
 
+  return accordionToBeOpened;
+}
+
+function getAccordionElements(accordion) {
+  const accordionButton = accordion.querySelector('button[aria-controls]');
+  const accordionContentId = accordionButton.getAttribute('aria-controls');
+  const accordionContent = document.getElementById(accordionContentId);
+  const accordionCheckbox = accordion.querySelector('.setup-guide__checkbox');
+
+  return { accordionButton, accordionContent, accordionCheckbox };
+}
+
+function openNextSetupGuideStepsAccordion(event) {
+  const setupGuideCheckbox = event.target.closest('.setup-guide__checkbox');
+  if (!setupGuideCheckbox || !setupGuideCheckbox.checked) return;
+
+  const currentAccordion = setupGuideCheckbox.closest('.setup-guide__step');
+  const allAccordions = [
+    ...setupGuideSteps.querySelectorAll('.setup-guide__step'),
+  ];
+
+  // Find the index of the current accordion
+  const currentAccordionIndex = allAccordions.findIndex((accordion) => {
+    return (
+      accordion.getAttribute('aria-labelledby') ===
+      currentAccordion.getAttribute('aria-labelledby')
+    );
+  });
+
+  const accordionToBeOpened = findNextAccordionToOpen(
+    allAccordions,
+    currentAccordionIndex
+  );
+
   if (!accordionToBeOpened) return;
 
-  const accordionToBeOpenedButton = accordionToBeOpened.querySelector(
-    'button[aria-controls]'
-  );
-  const accordionToBeOpenedContentId =
-    accordionToBeOpenedButton.getAttribute('aria-controls');
-  const accordionToBeOpenedContent = document.getElementById(
-    accordionToBeOpenedContentId
-  );
-
-  const accordionToBeOpenedCheckBox = accordionToBeOpened.querySelector(
-    '.setup-guide__checkbox'
-  );
+  const { accordionButton, accordionContent, accordionCheckbox } =
+    getAccordionElements(accordionToBeOpened);
 
   closeAllSetupGuideStepsAccordions();
-  openAccordion(accordionToBeOpenedButton, accordionToBeOpenedContent);
-  accordionToBeOpenedCheckBox.focus();
+  openAccordion(accordionButton, accordionContent);
+  accordionButton.focus();
 }
 
 function updateProgressBar(event) {
@@ -248,9 +251,76 @@ function updateProgressBar(event) {
 }
 
 function handleCheckboxEnterKeyPress(event) {
-  const checkbox = event.currentTarget;
+  if (!event.target.closest('.setup-guide__checkbox')) return;
+  const checkbox = event.target;
   const keyPressed = event.key;
   if (keyPressed === 'Enter') checkbox.click();
+}
+
+function findAccordionHeadingIndex(accordionHeading, allAccordionsHeading) {
+  return allAccordionsHeading.findIndex(
+    (heading) => heading === accordionHeading
+  );
+}
+
+function getAdjacentAccordionHeading(
+  currentAccordionHeading,
+  allAccordionsHeading,
+  direction
+) {
+  const currentIndex = findAccordionHeadingIndex(
+    currentAccordionHeading,
+    allAccordionsHeading
+  );
+
+  if (direction === 'next') {
+    return currentIndex === allAccordionsHeading.length - 1
+      ? allAccordionsHeading[0]
+      : allAccordionsHeading[currentIndex + 1];
+  } else if (direction === 'previous') {
+    return currentIndex === 0
+      ? allAccordionsHeading[allAccordionsHeading.length - 1]
+      : allAccordionsHeading[currentIndex - 1];
+  }
+
+  return null;
+}
+
+function focusAccordionButton(accordionHeading) {
+  const accordionButton = accordionHeading.querySelector('button');
+  if (accordionButton) {
+    accordionButton.focus();
+  }
+}
+
+function handleAccordionHeaderKeyPress(event) {
+  const currentAccordionHeading = event.target.closest(
+    '.setup-guide__step-heading'
+  );
+  if (!currentAccordionHeading) return;
+
+  const keyPressed = event.key;
+  const allAccordionsHeading = [
+    ...document.querySelectorAll('.setup-guide__step-heading'),
+  ];
+
+  const nextAccordionHeading = getAdjacentAccordionHeading(
+    currentAccordionHeading,
+    allAccordionsHeading,
+    'next'
+  );
+
+  const previousAccordionHeading = getAdjacentAccordionHeading(
+    currentAccordionHeading,
+    allAccordionsHeading,
+    'previous'
+  );
+
+  if (keyPressed === 'ArrowDown' || keyPressed === 'ArrowRight') {
+    focusAccordionButton(nextAccordionHeading);
+  } else if (keyPressed === 'ArrowUp' || keyPressed === 'ArrowLeft') {
+    focusAccordionButton(previousAccordionHeading);
+  }
 }
 
 notificationButton.addEventListener('click', toggleMenu);
@@ -261,6 +331,5 @@ setupStepsAccordionBtn.addEventListener('click', toggleSetupStepsAccordion);
 setupGuideSteps.addEventListener('click', toggleSetupGuideStepsAccordion);
 setupGuideSteps.addEventListener('click', openNextSetupGuideStepsAccordion);
 setupGuideSteps.addEventListener('click', updateProgressBar);
-allSetupGuideAccordionCheckbox.forEach((checkbox) => {
-  checkbox.addEventListener('keydown', handleCheckboxEnterKeyPress);
-});
+document.addEventListener('keydown', handleCheckboxEnterKeyPress);
+document.addEventListener('keydown', handleAccordionHeaderKeyPress);
