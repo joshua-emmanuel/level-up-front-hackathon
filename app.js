@@ -17,9 +17,10 @@ const setupGuideSteps = document.querySelector('.setup-guide__steps');
 const progressBar = document.querySelector('.progress-bar');
 const numOfCompletedGuides = document.querySelector('.no-of-completed-guide');
 const allSetupGuideAccordionCheckbox = [
-  ...document.querySelectorAll('.setup-guide__step-checkbox'),
+  ...setupGuideSteps.querySelectorAll('.setup-guide__step-checkbox'),
 ];
 const HIDDEN_CLASS = 'hidden';
+const TIMEOUT_DELAY = 1500;
 
 function closeOtherMenus(currentMenuId) {
   const otherMenuBtns = menuButtons.filter(
@@ -158,24 +159,44 @@ function toggleSetupStepsAccordion(event) {
   toggleAccordion(accordionButton, accordionContent);
 }
 
-function closeAllSetupGuideStepsAccordions() {
+function closeAllSetupGuidesAccordions() {
   const allSetupGuideAccordionBtns = [
     ...setupGuideSteps.querySelectorAll('button[aria-controls]'),
   ];
   allSetupGuideAccordionBtns.forEach((accBtn) => {
     const accContentId = accBtn.getAttribute('aria-controls');
     const accContent = document.getElementById(accContentId);
-    closeAccordion(accBtn, accContent);
+    closeSetupGuideStepAccordion(accBtn, accContent);
   });
 }
 
-function toggleSetupGuideStepsAccordion(event) {
+function openSetupGuideStepAccordion(accordionButton, accordionContent) {
+  const accordionInner = accordionContent.children[0];
+  const accordionContentHeight = accordionInner.getBoundingClientRect().height;
+  accordionContent.style.height = `${accordionContentHeight}px`;
+  openAccordion(accordionButton, accordionContent);
+}
+
+function closeSetupGuideStepAccordion(accordionButton, accordionContent) {
+  closeAccordion(accordionButton, accordionContent);
+  accordionContent.style.height = 0;
+}
+
+function toggleSetupGuideAccordion(accordionButton, accordionContent) {
+  if (accordionContent.getAttribute('aria-hidden') === 'true') {
+    openSetupGuideStepAccordion(accordionButton, accordionContent);
+  } else {
+    closeSetupGuideStepAccordion(accordionButton, accordionContent);
+  }
+}
+
+function toggleSetupGuidesAccordion(event) {
   const accordionButton = event.target.closest('button[aria-controls]');
   if (!accordionButton) return;
   const accordionContentId = accordionButton.getAttribute('aria-controls');
   const accordionContent = document.getElementById(accordionContentId);
-  closeAllSetupGuideStepsAccordions();
-  openAccordion(accordionButton, accordionContent);
+  closeAllSetupGuidesAccordions();
+  toggleSetupGuideAccordion(accordionButton, accordionContent);
 }
 
 function markCheckboxAsDone(checkbox) {
@@ -191,9 +212,15 @@ function markCheckboxAsDone(checkbox) {
   notCompletedIcon.classList.add(HIDDEN_CLASS);
   loadingSpinnerIcon.classList.remove(HIDDEN_CLASS);
 
+  checkbox.disabled = true;
+  checkbox.style.cursor = 'not-allowed';
+
   setTimeout(() => {
     loadingSpinnerIcon.classList.add(HIDDEN_CLASS);
     completedIcon.classList.remove(HIDDEN_CLASS);
+
+    checkbox.disabled = false;
+    checkbox.style.cursor = 'pointer';
 
     checkboxStatus.ariaLabel = `successfully ${checkbox.ariaLabel.replace(
       'mark',
@@ -201,7 +228,7 @@ function markCheckboxAsDone(checkbox) {
     )}`;
 
     checkbox.ariaChecked = 'true';
-  }, 1500);
+  }, TIMEOUT_DELAY);
 }
 
 function markCheckboxAsNotDone(checkbox) {
@@ -217,6 +244,9 @@ function markCheckboxAsNotDone(checkbox) {
   completedIcon.classList.add(HIDDEN_CLASS);
   loadingSpinnerIcon.classList.remove(HIDDEN_CLASS);
 
+  checkbox.disabled = true;
+  checkbox.style.cursor = 'not-allowed';
+
   setTimeout(() => {
     loadingSpinnerIcon.classList.add(HIDDEN_CLASS);
     notCompletedIcon.classList.remove(HIDDEN_CLASS);
@@ -226,8 +256,11 @@ function markCheckboxAsNotDone(checkbox) {
       'marked'
     )}`;
 
+    checkbox.disabled = false;
+    checkbox.style.cursor = 'pointer';
+
     checkbox.ariaChecked = 'false';
-  }, 1500);
+  }, TIMEOUT_DELAY);
 }
 
 function handleGuideStepCheckboxClick(event) {
@@ -302,14 +335,14 @@ function openNextSetupGuideStepsAccordion(event) {
 
   if (!accordionToBeOpened) return;
 
-  const { accordionButton, accordionContent, accordionCheckbox } =
+  const { accordionButton, accordionContent } =
     getAccordionElements(accordionToBeOpened);
 
   setTimeout(() => {
-    closeAllSetupGuideStepsAccordions();
-    openAccordion(accordionButton, accordionContent);
+    closeAllSetupGuidesAccordions();
+    openSetupGuideStepAccordion(accordionButton, accordionContent);
     accordionButton.focus();
-  }, 2500);
+  }, TIMEOUT_DELAY + 500);
 }
 
 function updateProgressBar(event) {
@@ -325,7 +358,7 @@ function updateProgressBar(event) {
       (numofCheckedCheckboxes / allSetupGuideAccordionCheckbox.length) * 100;
     progressBar.style.width = `${percentageOfCheckedCheckboxes}%`;
     numOfCompletedGuides.textContent = numofCheckedCheckboxes;
-  }, 1500);
+  }, TIMEOUT_DELAY);
 }
 
 function findAccordionHeadingIndex(accordionHeading, allAccordionsHeading) {
@@ -399,7 +432,7 @@ collectionsButton.addEventListener('click', toggleMenu);
 document.addEventListener('click', closeAllMenus);
 trialCalloutDismissBtn.addEventListener('click', dismissTrialCallout);
 setupStepsAccordionBtn.addEventListener('click', toggleSetupStepsAccordion);
-setupGuideSteps.addEventListener('click', toggleSetupGuideStepsAccordion);
+setupGuideSteps.addEventListener('click', toggleSetupGuidesAccordion);
 setupGuideSteps.addEventListener('click', handleGuideStepCheckboxClick);
 setupGuideSteps.addEventListener('click', openNextSetupGuideStepsAccordion);
 setupGuideSteps.addEventListener('click', updateProgressBar);
