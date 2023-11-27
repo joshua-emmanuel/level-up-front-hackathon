@@ -286,353 +286,591 @@
         </section>
 
         <section class="setup-guide">
-          <form id="setup-guide__form">
-            <div class="setup-guide__header">
-              <div
-                class="setup-guide__heading flex justify-between align-center"
+          <div class="setup-guide__header">
+            <div class="setup-guide__heading flex justify-between align-center">
+              <div>
+                <h2>Setup guide</h2>
+                <p>
+                  Use this personalized guide to get your store up and running.
+                </p>
+              </div>
+              <button
+                type="button"
+                aria-expanded="true"
+                aria-controls="setup-guide__steps"
+                class="flex align-center"
+                aria-label="open setup guide steps"
               >
-                <div>
-                  <h2>Setup guide</h2>
-                  <p>
-                    Use this personalized guide to get your store up and
-                    running.
-                  </p>
-                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M5.71967 8.46967C6.01256 8.17678 6.48744 8.17678 6.78033 8.46967L10.25 11.9393L13.7197 8.46967C14.0126 8.17678 14.4874 8.17678 14.7803 8.46967C15.0732 8.76256 15.0732 9.23744 14.7803 9.53033L10.7803 13.5303C10.4874 13.8232 10.0126 13.8232 9.71967 13.5303L5.71967 9.53033C5.42678 9.23744 5.42678 8.76256 5.71967 8.46967Z"
+                    fill="#4A4A4A"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="flex align-center">
+              <p><span class="no-of-completed-guide">0</span>/ 5 completed</p>
+              <div class="progress-bar-outer">
+                <div class="progress-bar"></div>
+              </div>
+            </div>
+          </div>
+          <div
+            id="setup-guide__steps"
+            class="setup-guide__steps"
+            aria-hidden="false"
+          >
+            <div
+              class="setup-guide__step"
+              aria-labelledby="setup-guide__step-heading--1"
+            >
+              <span
+                class="setup-guide__step-checkbox-status"
+                aria-live="polite"
+              ></span>
+              <button
+                role="checkbox"
+                class="setup-guide__step-checkbox"
+                aria-checked="false"
+                aria-label="mark customize your online store as completed"
+              >
+                <svg
+                  class="not-completed-icon"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="#8A8A8A"
+                    stroke-width="2.08333"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-dasharray="5 5"
+                  />
+                </svg>
+                <svg
+                  class="loading-spinner-icon hidden"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M22.0004 12C22.0004 13.9778 21.4139 15.9112 20.3151 17.5557C19.2162 19.2002 17.6545 20.4819 15.8272 21.2388C13.9999 21.9957 11.9893 22.1937 10.0495 21.8079C8.10965 21.422 6.32782 20.4696 4.9293 19.0711C3.53077 17.6725 2.57837 15.8907 2.19251 13.9509C1.80666 12.0111 2.00469 10.0004 2.76157 8.17317C3.51845 6.3459 4.80017 4.78412 6.44466 3.6853C8.08916 2.58649 10.0226 2 12.0004 2"
+                    stroke="#1C181D"
+                    stroke-width="2.08333"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <svg
+                  class="completed-icon hidden"
+                  aria-hidden="true"
+                  width="40"
+                  height="40"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="12" cy="12" r="10" fill="#303030"></circle>
+                  <path
+                    d="M17.2738 8.52629C17.6643 8.91682 17.6643 9.54998 17.2738 9.94051L11.4405 15.7738C11.05 16.1644 10.4168 16.1644 10.0263 15.7738L7.3596 13.1072C6.96908 12.7166 6.96908 12.0835 7.3596 11.693C7.75013 11.3024 8.38329 11.3024 8.77382 11.693L10.7334 13.6525L15.8596 8.52629C16.2501 8.13577 16.8833 8.13577 17.2738 8.52629Z"
+                    fill="#fff"
+                  ></path>
+                </svg>
+              </button>
+              <h2
+                id="setup-guide__step-heading--1"
+                class="setup-guide__step-heading fs-base fw-semi-bold"
+              >
                 <button
                   type="button"
                   aria-expanded="true"
-                  aria-controls="setup-guide__steps"
-                  class="flex align-center"
-                  aria-label="open setup guide steps"
+                  aria-controls="setup-guide__step-body--1"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                      d="M5.71967 8.46967C6.01256 8.17678 6.48744 8.17678 6.78033 8.46967L10.25 11.9393L13.7197 8.46967C14.0126 8.17678 14.4874 8.17678 14.7803 8.46967C15.0732 8.76256 15.0732 9.23744 14.7803 9.53033L10.7803 13.5303C10.4874 13.8232 10.0126 13.8232 9.71967 13.5303L5.71967 9.53033C5.42678 9.23744 5.42678 8.76256 5.71967 8.46967Z"
-                      fill="#4A4A4A"
-                    />
-                  </svg>
+                  Customize your online store
                 </button>
-              </div>
-              <div class="flex align-center">
-                <p><span class="no-of-completed-guide">0</span>/ 5 completed</p>
-                <div class="progress-bar-outer">
-                  <div class="progress-bar"></div>
+              </h2>
+              <div
+                id="setup-guide__step-body--1"
+                class="setup-guide__step-body"
+                aria-hidden="false"
+              >
+                <div class="setup-guide__step-info">
+                  <p>
+                    Choose a theme and add your logo, colors, and images to
+                    reflect your brand.
+                    <a
+                      aria-label="Learn more about how to customize your online store"
+                      href="https://help.shopify.com/en/manual/online-store/themes/customizing-themes"
+                      class="clr-state-focus"
+                      >Learn more</a
+                    >
+                  </p>
+                  <a href="https://admin.shopify.com/" class="btn btn--1"
+                    >Customize Theme</a
+                  >
+                </div>
+                <div class="setup-guide__step-image">
+                  <img
+                    src="https://crushingit.tech/hackathon-assets/customise-store.png"
+                    alt="Customer Store Illustration"
+                  />
                 </div>
               </div>
             </div>
             <div
-              id="setup-guide__steps"
-              class="setup-guide__steps"
-              aria-hidden="false"
+              class="setup-guide__step"
+              aria-labelledby="setup-guide__step-heading--2"
             >
-              <div
-                class="setup-guide__step"
-                aria-labelledby="setup-guide__step-heading--1"
+              <span
+                class="setup-guide__step-checkbox-status"
+                aria-live="polite"
+              ></span>
+              <button
+                role="checkbox"
+                class="setup-guide__step-checkbox"
+                aria-checked="false"
+                aria-label="mark add your first product as completed"
               >
-                <div class="setup-guide__step-checkbox">
-                  <label for="setup-guide__checkbox--1">
-                    <input
-                      type="checkbox"
-                      class="setup-guide__checkbox"
-                      id="setup-guide__checkbox--1"
-                    />
-                    <button
-                      aria-hidden="true"
-                      type="button"
-                      class="checkbox-img"
-                      tabindex="-1"
-                    ></button>
-                  </label>
-                </div>
-                <h2
-                  id="setup-guide__step-heading--1"
-                  class="setup-guide__step-heading fs-base fw-semi-bold"
+                <svg
+                  class="not-completed-icon"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
                 >
-                  <button
-                    type="button"
-                    aria-expanded="true"
-                    aria-controls="setup-guide__step-body--1"
-                  >
-                    Customize your online store
-                  </button>
-                </h2>
-                <div
-                  id="setup-guide__step-body--1"
-                  class="setup-guide__step-body"
-                  aria-hidden="false"
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="#8A8A8A"
+                    stroke-width="2.08333"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-dasharray="5 5"
+                  />
+                </svg>
+                <svg
+                  class="loading-spinner-icon hidden"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
                 >
-                  <div class="setup-guide__step-info">
-                    <p>
-                      Choose a theme and add your logo, colors, and images to
-                      reflect your brand.
-                      <a
-                        href="https://help.shopify.com/en/manual/online-store/themes/customizing-themes"
-                        class="clr-state-focus"
-                        >Learn more</a
-                      >
-                    </p>
+                  <path
+                    d="M22.0004 12C22.0004 13.9778 21.4139 15.9112 20.3151 17.5557C19.2162 19.2002 17.6545 20.4819 15.8272 21.2388C13.9999 21.9957 11.9893 22.1937 10.0495 21.8079C8.10965 21.422 6.32782 20.4696 4.9293 19.0711C3.53077 17.6725 2.57837 15.8907 2.19251 13.9509C1.80666 12.0111 2.00469 10.0004 2.76157 8.17317C3.51845 6.3459 4.80017 4.78412 6.44466 3.6853C8.08916 2.58649 10.0226 2 12.0004 2"
+                    stroke="#1C181D"
+                    stroke-width="2.08333"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <svg
+                  class="completed-icon hidden"
+                  aria-hidden="true"
+                  width="40"
+                  height="40"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="12" cy="12" r="10" fill="#303030"></circle>
+                  <path
+                    d="M17.2738 8.52629C17.6643 8.91682 17.6643 9.54998 17.2738 9.94051L11.4405 15.7738C11.05 16.1644 10.4168 16.1644 10.0263 15.7738L7.3596 13.1072C6.96908 12.7166 6.96908 12.0835 7.3596 11.693C7.75013 11.3024 8.38329 11.3024 8.77382 11.693L10.7334 13.6525L15.8596 8.52629C16.2501 8.13577 16.8833 8.13577 17.2738 8.52629Z"
+                    fill="#fff"
+                  ></path>
+                </svg>
+              </button>
+              <h2
+                id="setup-guide__step-heading--2"
+                class="setup-guide__step-heading fs-base fw-semi-bold"
+              >
+                <button
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="setup-guide__step-body--2"
+                >
+                  Add your first product
+                </button>
+              </h2>
+              <div
+                id="setup-guide__step-body--2"
+                class="setup-guide__step-body"
+                aria-hidden="true"
+              >
+                <div class="setup-guide__step-info">
+                  <p>
+                    Write a description, add photos, and set pricing for the
+                    products you plan to sell.
+                    <a
+                      aria-label="Learn more about how to add your first product"
+                      href="https://help.shopify.com/en/manual/products/add-update-products"
+                      class="clr-state-focus"
+                      >Learn more</a
+                    >
+                  </p>
+                  <div class="flex align-center">
                     <a href="https://admin.shopify.com/" class="btn btn--1"
-                      >Customize Theme</a
+                      >Add product</a
+                    >
+                    <a href="https://admin.shopify.com/" class="btn btn--3"
+                      >Import product</a
                     >
                   </div>
-                  <div class="setup-guide__step-image">
-                    <img
-                      src="https://crushingit.tech/hackathon-assets/customise-store.png"
-                      alt="Customer Store Illustration"
-                    />
-                  </div>
                 </div>
-              </div>
-              <div
-                class="setup-guide__step"
-                aria-labelledby="setup-guide__step-heading--2"
-              >
-                <div class="setup-guide__step-checkbox">
-                  <label for="setup-guide__checkbox--2">
-                    <input
-                      type="checkbox"
-                      class="setup-guide__checkbox"
-                      id="setup-guide__checkbox--2"
-                    />
-                    <button
-                      aria-hidden="true"
-                      type="button"
-                      class="checkbox-img"
-                      tabindex="-1"
-                    ></button>
-                  </label>
-                </div>
-                <h2
-                  id="setup-guide__step-heading--2"
-                  class="setup-guide__step-heading fs-base fw-semi-bold"
-                >
-                  <button
-                    type="button"
-                    aria-expanded="false"
-                    aria-controls="setup-guide__step-body--2"
-                  >
-                    Add your first product
-                  </button>
-                </h2>
-                <div
-                  id="setup-guide__step-body--2"
-                  class="setup-guide__step-body"
-                  aria-hidden="true"
-                >
-                  <div class="setup-guide__step-info">
-                    <p>
-                      Write a description, add photos, and set pricing for the
-                      products you plan to sell.
-                      <a
-                        href="https://help.shopify.com/en/manual/products/add-update-products"
-                        class="clr-state-focus"
-                        >Learn more</a
-                      >
-                    </p>
-                    <div class="flex align-center">
-                      <a href="https://admin.shopify.com/" class="btn btn--1"
-                        >Add product</a
-                      >
-                      <a href="https://admin.shopify.com/" class="btn btn--3"
-                        >Import product</a
-                      >
-                    </div>
-                  </div>
-                  <div class="setup-guide__step-image">
-                    <img
-                      src="https://crushingit.tech/hackathon-assets/product.png"
-                      alt="Product Illustration"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div
-                class="setup-guide__step"
-                aria-labelledby="setup-guide__step-heading--3"
-              >
-                <div class="setup-guide__step-checkbox">
-                  <label for="setup-guide__checkbox--3">
-                    <input
-                      type="checkbox"
-                      class="setup-guide__checkbox"
-                      id="setup-guide__checkbox--3"
-                    />
-                    <button
-                      aria-hidden="true"
-                      type="button"
-                      class="checkbox-img"
-                      tabindex="-1"
-                    ></button>
-                  </label>
-                </div>
-                <h2
-                  id="setup-guide__step-heading--3"
-                  class="setup-guide__step-heading fs-base fw-semi-bold"
-                >
-                  <button
-                    type="button"
-                    aria-expanded="false"
-                    aria-controls="setup-guide__step-body--3"
-                  >
-                    Add a custom domain
-                  </button>
-                </h2>
-                <div
-                  id="setup-guide__step-body--3"
-                  class="setup-guide__step-body"
-                  aria-hidden="true"
-                >
-                  <div class="setup-guide__step-info">
-                    <p>
-                      Your current domain is 222219.myshopify.com but you can
-                      add a custom domain to help customers find your online
-                      store
-                      <a
-                        href="https://help.shopify.com/en/manual/domains"
-                        class="clr-state-focus"
-                        >Learn more</a
-                      >
-                    </p>
-                    <a href="https://admin.shopify.com/" class="btn btn--1"
-                      >Add domain</a
-                    >
-                  </div>
-                  <div class="setup-guide__step-image">
-                    <img
-                      src="https://crushingit.tech/hackathon-assets/website.png"
-                      alt="Domain Name Illustration"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div
-                class="setup-guide__step"
-                aria-labelledby="setup-guide__step-heading--4"
-              >
-                <div class="setup-guide__step-checkbox">
-                  <label for="setup-guide__checkbox--4">
-                    <input
-                      type="checkbox"
-                      class="setup-guide__checkbox"
-                      id="setup-guide__checkbox--4"
-                    />
-                    <button
-                      aria-hidden="true"
-                      type="button"
-                      class="checkbox-img"
-                      tabindex="-1"
-                    ></button>
-                  </label>
-                </div>
-                <h2
-                  id="setup-guide__step-heading--4"
-                  class="setup-guide__step-heading fs-base fw-semi-bold"
-                >
-                  <button
-                    type="button"
-                    aria-expanded="false"
-                    aria-controls="setup-guide__step-body--4"
-                  >
-                    Name your store
-                  </button>
-                </h2>
-                <div
-                  id="setup-guide__step-body--4"
-                  class="setup-guide__step-body"
-                  aria-hidden="true"
-                >
-                  <div class="setup-guide__step-info">
-                    <p>
-                      Your temporary store name is currently Davii collections.
-                      The store name appears in your admin and your online
-                      store.
-                      <a
-                        href="https://help.shopify.com/en/manual/intro-to-shopify/initial-setup/setup-business-settings#set-or-change-your-online-store-name-and-legal-business-name"
-                        class="clr-state-focus"
-                        >Learn more</a
-                      >
-                    </p>
-                    <a href="https://admin.shopify.com/" class="btn btn--1"
-                      >Name Store</a
-                    >
-                  </div>
-                  <div class="setup-guide__step-image">
-                    <img
-                      src="https://crushingit.tech/hackathon-assets/name-store.png"
-                      alt="Name Store Illustration"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div
-                class="setup-guide__step"
-                aria-labelledby="setup-guide__step-heading--5"
-              >
-                <div class="setup-guide__step-checkbox">
-                  <label for="setup-guide__checkbox--5">
-                    <input
-                      type="checkbox"
-                      class="setup-guide__checkbox"
-                      id="setup-guide__checkbox--5"
-                    />
-                    <button
-                      aria-hidden="true"
-                      type="button"
-                      class="checkbox-img"
-                      tabindex="-1"
-                    ></button>
-                  </label>
-                </div>
-                <h2
-                  id="setup-guide__step-heading--5"
-                  class="setup-guide__step-heading fs-base fw-semi-bold"
-                >
-                  <button
-                    type="button"
-                    aria-expanded="false"
-                    aria-controls="setup-guide__step-body--5"
-                  >
-                    Set up a payment provider
-                  </button>
-                </h2>
-                <div
-                  id="setup-guide__step-body--5"
-                  class="setup-guide__step-body"
-                  aria-hidden="true"
-                >
-                  <div class="setup-guide__step-info">
-                    <p>
-                      Choose a payment provider to start accepting payments.
-                      You’ll need to create an account with the payment provider
-                      and set it up with your Shopify store.
-                      <a
-                        href="https://help.shopify.com/en/manual/payments"
-                        class="clr-state-focus"
-                        >Learn more</a
-                      >
-                    </p>
-                    <a href="https://admin.shopify.com/" class="btn btn--1"
-                      >Set up payment</a
-                    >
-                  </div>
-                  <div class="setup-guide__step-image">
-                    <img
-                      src="https://crushingit.tech/hackathon-assets/payment.png"
-                      alt="Payment Illustration"
-                    />
-                  </div>
+                <div class="setup-guide__step-image">
+                  <img
+                    src="https://crushingit.tech/hackathon-assets/product.png"
+                    alt="Product Illustration"
+                  />
                 </div>
               </div>
             </div>
-          </form>
+            <div
+              class="setup-guide__step"
+              aria-labelledby="setup-guide__step-heading--3"
+            >
+              <span
+                class="setup-guide__step-checkbox-status"
+                aria-live="polite"
+              ></span>
+              <button
+                role="checkbox"
+                class="setup-guide__step-checkbox"
+                aria-checked="false"
+                aria-label="mark add a custom domain as completed"
+              >
+                <svg
+                  class="not-completed-icon"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="#8A8A8A"
+                    stroke-width="2.08333"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-dasharray="5 5"
+                  />
+                </svg>
+                <svg
+                  class="loading-spinner-icon hidden"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M22.0004 12C22.0004 13.9778 21.4139 15.9112 20.3151 17.5557C19.2162 19.2002 17.6545 20.4819 15.8272 21.2388C13.9999 21.9957 11.9893 22.1937 10.0495 21.8079C8.10965 21.422 6.32782 20.4696 4.9293 19.0711C3.53077 17.6725 2.57837 15.8907 2.19251 13.9509C1.80666 12.0111 2.00469 10.0004 2.76157 8.17317C3.51845 6.3459 4.80017 4.78412 6.44466 3.6853C8.08916 2.58649 10.0226 2 12.0004 2"
+                    stroke="#1C181D"
+                    stroke-width="2.08333"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <svg
+                  class="completed-icon hidden"
+                  aria-hidden="true"
+                  width="40"
+                  height="40"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="12" cy="12" r="10" fill="#303030"></circle>
+                  <path
+                    d="M17.2738 8.52629C17.6643 8.91682 17.6643 9.54998 17.2738 9.94051L11.4405 15.7738C11.05 16.1644 10.4168 16.1644 10.0263 15.7738L7.3596 13.1072C6.96908 12.7166 6.96908 12.0835 7.3596 11.693C7.75013 11.3024 8.38329 11.3024 8.77382 11.693L10.7334 13.6525L15.8596 8.52629C16.2501 8.13577 16.8833 8.13577 17.2738 8.52629Z"
+                    fill="#fff"
+                  ></path>
+                </svg>
+              </button>
+              <h2
+                id="setup-guide__step-heading--3"
+                class="setup-guide__step-heading fs-base fw-semi-bold"
+              >
+                <button
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="setup-guide__step-body--3"
+                >
+                  Add a custom domain
+                </button>
+              </h2>
+              <div
+                id="setup-guide__step-body--3"
+                class="setup-guide__step-body"
+                aria-hidden="true"
+              >
+                <div class="setup-guide__step-info">
+                  <p>
+                    Your current domain is 222219.myshopify.com but you can add
+                    a custom domain to help customers find your online store
+                    <a
+                      aria-label="Learn more about how to add a custom domain"
+                      href="https://help.shopify.com/en/manual/domains"
+                      class="clr-state-focus"
+                      >Learn more</a
+                    >
+                  </p>
+                  <a href="https://admin.shopify.com/" class="btn btn--1"
+                    >Add domain</a
+                  >
+                </div>
+                <div class="setup-guide__step-image">
+                  <img
+                    src="https://crushingit.tech/hackathon-assets/website.png"
+                    alt="Domain Name Illustration"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="setup-guide__step"
+              aria-labelledby="setup-guide__step-heading--4"
+            >
+              <span
+                class="setup-guide__step-checkbox-status"
+                aria-live="polite"
+              ></span>
+              <button
+                role="checkbox"
+                class="setup-guide__step-checkbox"
+                aria-checked="false"
+                aria-label="mark name your store as completed"
+              >
+                <svg
+                  class="not-completed-icon"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="#8A8A8A"
+                    stroke-width="2.08333"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-dasharray="5 5"
+                  />
+                </svg>
+                <svg
+                  class="loading-spinner-icon hidden"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M22.0004 12C22.0004 13.9778 21.4139 15.9112 20.3151 17.5557C19.2162 19.2002 17.6545 20.4819 15.8272 21.2388C13.9999 21.9957 11.9893 22.1937 10.0495 21.8079C8.10965 21.422 6.32782 20.4696 4.9293 19.0711C3.53077 17.6725 2.57837 15.8907 2.19251 13.9509C1.80666 12.0111 2.00469 10.0004 2.76157 8.17317C3.51845 6.3459 4.80017 4.78412 6.44466 3.6853C8.08916 2.58649 10.0226 2 12.0004 2"
+                    stroke="#1C181D"
+                    stroke-width="2.08333"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <svg
+                  class="completed-icon hidden"
+                  aria-hidden="true"
+                  width="40"
+                  height="40"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="12" cy="12" r="10" fill="#303030"></circle>
+                  <path
+                    d="M17.2738 8.52629C17.6643 8.91682 17.6643 9.54998 17.2738 9.94051L11.4405 15.7738C11.05 16.1644 10.4168 16.1644 10.0263 15.7738L7.3596 13.1072C6.96908 12.7166 6.96908 12.0835 7.3596 11.693C7.75013 11.3024 8.38329 11.3024 8.77382 11.693L10.7334 13.6525L15.8596 8.52629C16.2501 8.13577 16.8833 8.13577 17.2738 8.52629Z"
+                    fill="#fff"
+                  ></path>
+                </svg>
+              </button>
+              <h2
+                id="setup-guide__step-heading--4"
+                class="setup-guide__step-heading fs-base fw-semi-bold"
+              >
+                <button
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="setup-guide__step-body--4"
+                >
+                  Name your store
+                </button>
+              </h2>
+              <div
+                id="setup-guide__step-body--4"
+                class="setup-guide__step-body"
+                aria-hidden="true"
+              >
+                <div class="setup-guide__step-info">
+                  <p>
+                    Your temporary store name is currently Davii collections.
+                    The store name appears in your admin and your online store.
+                    <a
+                      aria-label="Learn more about how to name your store"
+                      href="https://help.shopify.com/en/manual/intro-to-shopify/initial-setup/setup-business-settings#set-or-change-your-online-store-name-and-legal-business-name"
+                      class="clr-state-focus"
+                      >Learn more</a
+                    >
+                  </p>
+                  <a href="https://admin.shopify.com/" class="btn btn--1"
+                    >Name Store</a
+                  >
+                </div>
+                <div class="setup-guide__step-image">
+                  <img
+                    src="https://crushingit.tech/hackathon-assets/name-store.png"
+                    alt="Name Store Illustration"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class="setup-guide__step"
+              aria-labelledby="setup-guide__step-heading--5"
+            >
+              <span
+                class="setup-guide__step-checkbox-status"
+                aria-live="polite"
+              ></span>
+              <button
+                role="checkbox"
+                class="setup-guide__step-checkbox"
+                aria-checked="false"
+                aria-label="mark setup a payment provider as completed"
+              >
+                <svg
+                  class="not-completed-icon"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="#8A8A8A"
+                    stroke-width="2.08333"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-dasharray="5 5"
+                  />
+                </svg>
+                <svg
+                  class="loading-spinner-icon hidden"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M22.0004 12C22.0004 13.9778 21.4139 15.9112 20.3151 17.5557C19.2162 19.2002 17.6545 20.4819 15.8272 21.2388C13.9999 21.9957 11.9893 22.1937 10.0495 21.8079C8.10965 21.422 6.32782 20.4696 4.9293 19.0711C3.53077 17.6725 2.57837 15.8907 2.19251 13.9509C1.80666 12.0111 2.00469 10.0004 2.76157 8.17317C3.51845 6.3459 4.80017 4.78412 6.44466 3.6853C8.08916 2.58649 10.0226 2 12.0004 2"
+                    stroke="#1C181D"
+                    stroke-width="2.08333"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <svg
+                  class="completed-icon hidden"
+                  aria-hidden="true"
+                  width="40"
+                  height="40"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle cx="12" cy="12" r="10" fill="#303030"></circle>
+                  <path
+                    d="M17.2738 8.52629C17.6643 8.91682 17.6643 9.54998 17.2738 9.94051L11.4405 15.7738C11.05 16.1644 10.4168 16.1644 10.0263 15.7738L7.3596 13.1072C6.96908 12.7166 6.96908 12.0835 7.3596 11.693C7.75013 11.3024 8.38329 11.3024 8.77382 11.693L10.7334 13.6525L15.8596 8.52629C16.2501 8.13577 16.8833 8.13577 17.2738 8.52629Z"
+                    fill="#fff"
+                  ></path>
+                </svg>
+              </button>
+              <h2
+                id="setup-guide__step-heading--5"
+                class="setup-guide__step-heading fs-base fw-semi-bold"
+              >
+                <button
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="setup-guide__step-body--5"
+                >
+                  Set up a payment provider
+                </button>
+              </h2>
+              <div
+                id="setup-guide__step-body--5"
+                class="setup-guide__step-body"
+                aria-hidden="true"
+              >
+                <div class="setup-guide__step-info">
+                  <p>
+                    Choose a payment provider to start accepting payments.
+                    You’ll need to create an account with the payment provider
+                    and set it up with your Shopify store.
+                    <a
+                      aria-label="Learn more about how to setup a payment provider"
+                      href="https://help.shopify.com/en/manual/payments"
+                      class="clr-state-focus"
+                      >Learn more</a
+                    >
+                  </p>
+                  <a href="https://admin.shopify.com/" class="btn btn--1"
+                    >Set up payment</a
+                  >
+                </div>
+                <div class="setup-guide__step-image">
+                  <img
+                    src="https://crushingit.tech/hackathon-assets/payment.png"
+                    alt="Payment Illustration"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
     </main>
