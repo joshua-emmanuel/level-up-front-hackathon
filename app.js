@@ -201,7 +201,6 @@ function markCheckboxAsDone(checkbox) {
     )}`;
 
     checkbox.ariaChecked = 'true';
-    checkbox.ariaLabel = checkbox.ariaLabel.replace('as done', 'as not done');
   }, 1500);
 }
 
@@ -227,7 +226,6 @@ function markCheckboxAsNotDone(checkbox) {
       'marked'
     )}`;
 
-    // checkbox.ariaLabel = checkbox.ariaLabel.replace('as not done', 'as done');
     checkbox.ariaChecked = 'false';
   }, 1500);
 }
