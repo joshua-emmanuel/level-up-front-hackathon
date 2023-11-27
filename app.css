@@ -561,7 +561,7 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
   margin-bottom: 1rem;
 }
 
-.setup-guide__steps[aria-hidden='true'] {
+.setup-guide__steps {
   visibility: hidden;
   height: 0;
 }
@@ -574,7 +574,7 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
 .setup-guide__step {
   position: relative;
   border-radius: 0.625rem;
-  padding: 0.5rem 0.5rem 0.75rem 2.5rem;
+  padding: 0.5rem 0.5rem 1rem 2.5rem;
   margin-bottom: 0.12rem;
 }
 
@@ -582,14 +582,35 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
   background-color: hsl(0, 0%, 95%);
 }
 
-.setup-guide__step-body[aria-hidden='true'] {
-  display: none;
+.setup-guide__step-body {
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  transition: height 350ms ease-out, visibility 0s 350ms;
 }
 
 .setup-guide__step-body[aria-hidden='false'] {
+  visibility: visible;
+  transition: height 350ms ease-out, visibility 0s 0s;
+}
+
+#setup-guide__step-body--1 {
+  height: 124.188px;
+}
+
+.setup-guide__steps[aria-hidden='true'] * {
+  visibility: hidden;
+  transition: none;
+}
+
+.setup-guide__step-body-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.setup-guide__step-body-inner .btn {
+  margin-left: 2px;
 }
 
 .setup-guide__step-heading {
