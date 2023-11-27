@@ -53,11 +53,12 @@ button {
   border: 0;
   cursor: pointer;
   background: none;
+  border-radius: 0.25rem;
 }
 
 button:focus-visible {
-  border-radius: 0.25rem;
   outline: 2px solid var(--clr-state-focus);
+  outline-offset: 1px;
 }
 
 .btn {
@@ -192,6 +193,10 @@ button:focus-visible {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.hidden {
+  display: none;
 }
 
 body {
@@ -569,7 +574,7 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
 .setup-guide__step {
   position: relative;
   border-radius: 0.625rem;
-  padding: 0.7rem 0.5rem 0.75rem 2.5rem;
+  padding: 0.5rem 0.5rem 0.75rem 2.5rem;
   margin-bottom: 0.12rem;
 }
 
@@ -589,6 +594,7 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
 
 .setup-guide__step-heading {
   margin-bottom: 1rem;
+  line-height: 1.375rem;
 }
 
 .setup-guide__step-info {
@@ -610,49 +616,89 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
 
 .setup-guide__step-image {
   display: none;
-  align-self: start;
 }
 
 .setup-guide__step-checkbox {
+  outline: none;
   position: absolute;
   top: 0.5rem;
   left: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+
+  display: flex;
+  align-items: center;
 }
 
-.setup-guide__step-checkbox label {
-  position: relative;
+.setup-guide__step-checkbox:focus {
+  outline: 2px solid var(--clr-state-focus);
+  outline-offset: 1px;
 }
 
-.setup-guide__checkbox {
-  position: absolute;
-  top: -0.5rem;
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  transform: scale(1.5);
-  cursor: pointer;
+.setup-guide__step-checkbox:hover .not-completed-icon circle {
+  stroke-dasharray: 0 0;
 }
 
-.checkbox-img {
+.setup-guide__step-checkbox:focus .not-completed-icon circle {
+  fill: #d9d9d9;
+  stroke-dasharray: 0 0;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-spinner-icon {
+  animation-name: spin;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes zoom-in-spin {
+  from {
+    transform: scale(0) rotate(270deg);
+    opacity: 0;
+  }
+
+  to {
+    transform: scale(1) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+.completed-icon {
+  animation-name: zoom-in-spin;
+  animation-duration: 350ms;
+  animation-timing-function: linear;
+}
+
+/*
+.checkbox-icon {
   display: inline-block;
   object-fit: cover;
   width: 1.5rem;
   aspect-ratio: 1;
-  /* background-color: black; */
   background-size: 1.5rem;
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="%238A8A8A" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5 5"/></svg>');
 }
 
-.setup-guide__checkbox:hover + .checkbox-img {
+.setup-guide__checkbox:hover + .checkbox-icon {
   background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="%238A8A8A" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/></svg>');
 }
 
-.setup-guide__checkbox:focus + .checkbox-img {
+.setup-guide__checkbox:focus + .checkbox-icon {
   border-radius: 0.25rem;
   outline: 2px solid var(--clr-state-focus);
 }
 
-.setup-guide__checkbox:checked + .checkbox-img {
+.setup-guide__checkbox:checked + .checkbox-icon {
   animation: checkbox-animation 350ms ease-out forwards;
 }
 
@@ -673,6 +719,7 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
     background-image: url('data:image/svg+xml,<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="Component 13"><circle id="Ellipse 1" cx="11.9996" cy="12" r="10" fill="%231C181D" stroke="%231C181D" stroke-width="2.08333" stroke-linecap="round" stroke-linejoin="round"/><g id="TickMinor"><path id="Icon" fill-rule="evenodd" clip-rule="evenodd" d="M16.8162 8.64149C17.0603 8.88557 17.0603 9.2813 16.8162 9.52538L11.3995 14.942C11.1555 15.1861 10.7597 15.1861 10.5157 14.942L7.80733 12.2337C7.56325 11.9896 7.56325 11.5939 7.80733 11.3498C8.0514 11.1057 8.44713 11.1057 8.69121 11.3498L10.9576 13.6162L15.9323 8.64149C16.1764 8.39742 16.5721 8.39742 16.8162 8.64149Z" fill="white"/></g></g></svg>');
   }
 }
+*/
 
 @media (min-width: 50em) {
   .setup-guide {
