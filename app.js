@@ -17,8 +17,9 @@ const setupGuideSteps = document.querySelector('.setup-guide__steps');
 const progressBar = document.querySelector('.progress-bar');
 const numOfCompletedGuides = document.querySelector('.no-of-completed-guide');
 const allSetupGuideAccordionCheckbox = [
-  ...document.querySelectorAll('.setup-guide__checkbox'),
+  ...document.querySelectorAll('.setup-guide__step-checkbox'),
 ];
+const HIDDEN_CLASS = 'hidden';
 
 function closeOtherMenus(currentMenuId) {
   const otherMenuBtns = menuButtons.filter(
@@ -177,23 +178,92 @@ function toggleSetupGuideStepsAccordion(event) {
   openAccordion(accordionButton, accordionContent);
 }
 
+function markCheckboxAsDone(checkbox) {
+  const notCompletedIcon = checkbox.querySelector('.not-completed-icon');
+  const completedIcon = checkbox.querySelector('.completed-icon');
+  const loadingSpinnerIcon = checkbox.querySelector('.loading-spinner-icon');
+
+  const checkboxStatus = checkbox.parentElement.querySelector(
+    '.setup-guide__step-checkbox-status'
+  );
+  checkboxStatus.ariaLabel = 'Loading. Please wait...';
+
+  notCompletedIcon.classList.add(HIDDEN_CLASS);
+  loadingSpinnerIcon.classList.remove(HIDDEN_CLASS);
+
+  setTimeout(() => {
+    loadingSpinnerIcon.classList.add(HIDDEN_CLASS);
+    completedIcon.classList.remove(HIDDEN_CLASS);
+
+    checkboxStatus.ariaLabel = `successfully ${checkbox.ariaLabel.replace(
+      'mark',
+      'marked'
+    )}`;
+
+    checkbox.ariaChecked = 'true';
+    checkbox.ariaLabel = checkbox.ariaLabel.replace('as done', 'as not done');
+  }, 1500);
+}
+
+function markCheckboxAsNotDone(checkbox) {
+  const notCompletedIcon = checkbox.querySelector('.not-completed-icon');
+  const completedIcon = checkbox.querySelector('.completed-icon');
+  const loadingSpinnerIcon = checkbox.querySelector('.loading-spinner-icon');
+
+  const checkboxStatus = checkbox.parentElement.querySelector(
+    '.setup-guide__step-checkbox-status'
+  );
+  checkboxStatus.ariaLabel = 'Loading. Please wait...';
+
+  completedIcon.classList.add(HIDDEN_CLASS);
+  loadingSpinnerIcon.classList.remove(HIDDEN_CLASS);
+
+  setTimeout(() => {
+    loadingSpinnerIcon.classList.add(HIDDEN_CLASS);
+    notCompletedIcon.classList.remove(HIDDEN_CLASS);
+
+    checkboxStatus.ariaLabel = `successfully ${checkbox.ariaLabel.replace(
+      'mark',
+      'marked'
+    )}`;
+
+    // checkbox.ariaLabel = checkbox.ariaLabel.replace('as not done', 'as done');
+    checkbox.ariaChecked = 'false';
+  }, 1500);
+}
+
+function handleGuideStepCheckboxClick(event) {
+  const checkbox = event.target.closest('.setup-guide__step-checkbox');
+  if (!checkbox) return;
+  const checkboxIsChecked = checkbox.ariaChecked;
+  if (checkboxIsChecked === 'false') {
+    markCheckboxAsDone(checkbox);
+  } else {
+    markCheckboxAsNotDone(checkbox);
+  }
+}
+
 function findNextAccordionToOpen(allAccordions, currentAccordionIndex) {
   // Get next accordions after the current one
   const nextAccordions = allAccordions.slice(currentAccordionIndex + 1);
 
   // If no incomplete step is found after the current step, check previous accordions
   let accordionToBeOpened = nextAccordions.find((accordion) => {
-    const accordionCheckbox = accordion.querySelector('.setup-guide__checkbox');
-    return !accordionCheckbox.checked;
+    const accordionCheckbox = accordion.querySelector(
+      '.setup-guide__step-checkbox'
+    );
+    const accordionCheckboxIsChecked = accordionCheckbox.ariaChecked;
+    return accordionCheckboxIsChecked === 'false';
   });
 
   // If no incomplete step is found, check previous accordions
   if (!accordionToBeOpened) {
     accordionToBeOpened = allAccordions.find((accordion) => {
       const accordionCheckbox = accordion.querySelector(
-        '.setup-guide__checkbox'
+        '.setup-guide__step-checkbox'
       );
-      return !accordionCheckbox.checked;
+      const accordionCheckboxIsChecked = accordionCheckbox.ariaChecked;
+      return accordionCheckboxIsChecked === 'false';
     });
   }
 
@@ -204,14 +274,15 @@ function getAccordionElements(accordion) {
   const accordionButton = accordion.querySelector('button[aria-controls]');
   const accordionContentId = accordionButton.getAttribute('aria-controls');
   const accordionContent = document.getElementById(accordionContentId);
-  const accordionCheckbox = accordion.querySelector('.setup-guide__checkbox');
 
-  return { accordionButton, accordionContent, accordionCheckbox };
+  return { accordionButton, accordionContent };
 }
 
 function openNextSetupGuideStepsAccordion(event) {
-  const setupGuideCheckbox = event.target.closest('.setup-guide__checkbox');
-  if (!setupGuideCheckbox || !setupGuideCheckbox.checked) return;
+  const setupGuideCheckbox = event.target.closest(
+    '.setup-guide__step-checkbox'
+  );
+  if (!setupGuideCheckbox) return;
 
   const currentAccordion = setupGuideCheckbox.closest('.setup-guide__step');
   const allAccordions = [
@@ -236,28 +307,27 @@ function openNextSetupGuideStepsAccordion(event) {
   const { accordionButton, accordionContent, accordionCheckbox } =
     getAccordionElements(accordionToBeOpened);
 
-  closeAllSetupGuideStepsAccordions();
-  openAccordion(accordionButton, accordionContent);
-  accordionButton.focus();
+  setTimeout(() => {
+    closeAllSetupGuideStepsAccordions();
+    openAccordion(accordionButton, accordionContent);
+    accordionButton.focus();
+  }, 2500);
 }
 
 function updateProgressBar(event) {
-  if (!event.target.closest('.setup-guide__checkbox')) return;
-  const checkedCheckboxes = allSetupGuideAccordionCheckbox.filter(
-    (checkbox) => checkbox.checked
-  );
-  const numofCheckedCheckboxes = checkedCheckboxes.length;
-  const percentageOfCheckedCheckboxes =
-    (numofCheckedCheckboxes / allSetupGuideAccordionCheckbox.length) * 100;
-  progressBar.style.width = `${percentageOfCheckedCheckboxes}%`;
-  numOfCompletedGuides.textContent = numofCheckedCheckboxes;
-}
-
-function handleCheckboxEnterKeyPress(event) {
-  if (!event.target.closest('.setup-guide__checkbox')) return;
-  const checkbox = event.target;
-  const keyPressed = event.key;
-  if (keyPressed === 'Enter') checkbox.click();
+  if (!event.target.closest('.setup-guide__step-checkbox')) return;
+  setTimeout(() => {
+    const checkedCheckboxes = allSetupGuideAccordionCheckbox.filter(
+      (checkbox) => {
+        return checkbox.ariaChecked === 'true';
+      }
+    );
+    const numofCheckedCheckboxes = checkedCheckboxes.length;
+    const percentageOfCheckedCheckboxes =
+      (numofCheckedCheckboxes / allSetupGuideAccordionCheckbox.length) * 100;
+    progressBar.style.width = `${percentageOfCheckedCheckboxes}%`;
+    numOfCompletedGuides.textContent = numofCheckedCheckboxes;
+  }, 1500);
 }
 
 function findAccordionHeadingIndex(accordionHeading, allAccordionsHeading) {
@@ -332,7 +402,7 @@ document.addEventListener('click', closeAllMenus);
 trialCalloutDismissBtn.addEventListener('click', dismissTrialCallout);
 setupStepsAccordionBtn.addEventListener('click', toggleSetupStepsAccordion);
 setupGuideSteps.addEventListener('click', toggleSetupGuideStepsAccordion);
+setupGuideSteps.addEventListener('click', handleGuideStepCheckboxClick);
 setupGuideSteps.addEventListener('click', openNextSetupGuideStepsAccordion);
 setupGuideSteps.addEventListener('click', updateProgressBar);
-document.addEventListener('keydown', handleCheckboxEnterKeyPress);
 document.addEventListener('keydown', handleAccordionHeaderKeyPress);
