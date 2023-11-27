@@ -593,8 +593,7 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
 }
 
 .setup-guide__step-heading {
-  margin-block: 1px 1rem;
-  line-height: 1.375rem;
+  margin-block: 2px 1rem;
 }
 
 .setup-guide__step-info {
