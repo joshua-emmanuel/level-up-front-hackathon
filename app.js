@@ -314,6 +314,8 @@ function openNextSetupGuideStepsAccordion(event) {
     '.setup-guide__step-checkbox'
   );
   if (!setupGuideCheckbox) return;
+  const setupGuideCheckboxIsChecked = setupGuideCheckbox.ariaChecked;
+  if (setupGuideCheckboxIsChecked === 'true') return;
 
   const currentAccordion = setupGuideCheckbox.closest('.setup-guide__step');
   const allAccordions = [
