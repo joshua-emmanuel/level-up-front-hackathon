@@ -504,11 +504,16 @@ main {
 /* Setup Guide */
 .setup-guide {
   margin-top: 1rem;
-  padding: 1rem;
+  padding: 0.5rem;
   padding-bottom: 0;
   border: 1px solid var(--clr-stroke-50);
   background-color: var(--clr-white);
   box-shadow: 0px 1px 0px 0px #0000000d;
+}
+
+.setup-guide__header {
+  padding: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .setup-guide__heading h2 {
@@ -558,14 +563,6 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
 }
 
 .setup-guide__steps {
-  padding-top: 1.5rem;
-}
-
-.setup-guide__steps > :last-child {
-  margin-bottom: 1rem;
-}
-
-.setup-guide__steps {
   visibility: hidden;
   height: 0;
 }
@@ -578,12 +575,24 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
 .setup-guide__step {
   position: relative;
   border-radius: 0.625rem;
-  padding: 0.5rem 0.5rem 1rem 2.5rem;
-  margin-bottom: 0.12rem;
+  padding: 0.5rem 0.5rem 0.75rem 2.5rem;
+  margin-bottom: 0.13rem;
 }
 
 .setup-guide__step:has([aria-expanded='true']) {
   background-color: hsl(0, 0%, 95%);
+}
+
+.setup-guide__step-heading {
+  margin-top: 2px;
+}
+
+.setup-guide__step-heading button {
+  font-weight: 500;
+}
+
+.setup-guide__step-heading button[aria-expanded='true'] {
+  font-weight: 600;
 }
 
 .setup-guide__step-body {
@@ -611,10 +620,6 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.setup-guide__step-heading {
-  margin-block: 2px 1rem;
 }
 
 .setup-guide__step-info {
