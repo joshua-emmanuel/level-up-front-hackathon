@@ -609,10 +609,6 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
   justify-content: space-between;
 }
 
-.setup-guide__step-body-inner .btn {
-  margin-left: 2px;
-}
-
 .setup-guide__step-heading {
   margin-block: 2px 1rem;
 }
