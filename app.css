@@ -217,6 +217,10 @@ body {
   background-color: var(--clr-grey-300);
 }
 
+.header__logo {
+  padding-top: 0.3rem;
+}
+
 .header__form {
   position: relative;
   width: 70%;
