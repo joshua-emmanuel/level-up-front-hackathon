@@ -611,6 +611,10 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
   height: auto;
 }
 
+.setup-guide__step:last-child {
+  margin-bottom: 0.25rem;
+}
+
 .setup-guide__steps[aria-hidden='true'] * {
   visibility: hidden;
   transition: none;
@@ -627,6 +631,7 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
   justify-items: start;
   gap: 1rem;
   max-width: 20.375rem;
+  margin-top: 1rem;
   font-weight: var(--fw-medium);
   color: var(--clr-text-mid);
 }
@@ -716,6 +721,8 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
 
   .setup-guide__step-image {
     display: block;
+    width: 9.75906rem;
+    height: 7.5rem;
   }
 
   .setup-guide__step-heading {
