@@ -599,12 +599,12 @@ button[aria-controls='setup-guide__steps'][aria-expanded='false'] {
   height: 0;
   overflow: hidden;
   visibility: hidden;
-  transition: height 350ms ease-out, visibility 0s 350ms;
+  transition: height 500ms ease-out, visibility 0s 500ms;
 }
 
 .setup-guide__step-body[aria-hidden='false'] {
   visibility: visible;
-  transition: height 350ms ease-out, visibility 0s 0s;
+  transition: height 500ms ease-out, visibility 0s 0s;
 }
 
 #setup-guide__step-body--1 {
