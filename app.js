@@ -182,21 +182,13 @@ function closeSetupGuideStepAccordion(accordionButton, accordionContent) {
   accordionContent.style.height = 0;
 }
 
-function toggleSetupGuideAccordion(accordionButton, accordionContent) {
-  if (accordionContent.getAttribute('aria-hidden') === 'true') {
-    openSetupGuideStepAccordion(accordionButton, accordionContent);
-  } else {
-    closeSetupGuideStepAccordion(accordionButton, accordionContent);
-  }
-}
-
 function toggleSetupGuidesAccordion(event) {
   const accordionButton = event.target.closest('button[aria-controls]');
   if (!accordionButton) return;
   const accordionContentId = accordionButton.getAttribute('aria-controls');
   const accordionContent = document.getElementById(accordionContentId);
   closeAllSetupGuidesAccordions();
-  toggleSetupGuideAccordion(accordionButton, accordionContent);
+  openSetupGuideStepAccordion(accordionButton, accordionContent);
 }
 
 function markCheckboxAsDone(checkbox) {
